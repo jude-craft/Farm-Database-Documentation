@@ -16,7 +16,6 @@ A comprehensive database system designed to manage all aspects of a university f
 - [Entity-Relationship Diagram](#entity-relationship-diagram)
 - [Database Schema](#database-schema)
 - [Installation Guide](#installation-guide)
-- [Usage Examples](#usage-examples)
 - [Contributing](#contributing)
 
 ---
@@ -284,9 +283,7 @@ Below are the complete SQL statements to create the database schema. Execute the
 #### Step 1: Create Base Tables (No Foreign Keys)
 
 ```sql
--- =============================================
 -- Employee Table
--- =============================================
 CREATE TABLE Employee (
     employee_id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(50) NOT NULL,
@@ -297,9 +294,7 @@ CREATE TABLE Employee (
     salary DECIMAL(10,2) CHECK (salary >= 0)
 );
 
--- =============================================
 -- Crop Table
--- =============================================
 CREATE TABLE Crop (
     crop_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
@@ -311,9 +306,7 @@ CREATE TABLE Crop (
     CHECK (harvest_date IS NULL OR harvest_date >= planting_date)
 );
 
--- =============================================
 -- Livestock Table
--- =============================================
 CREATE TABLE Livestock (
     animal_id INT PRIMARY KEY AUTO_INCREMENT,
     tag_number VARCHAR(20) UNIQUE NOT NULL,
@@ -325,9 +318,7 @@ CREATE TABLE Livestock (
     health_status VARCHAR(50) DEFAULT 'Healthy'
 );
 
--- =============================================
 -- Equipment Table
--- =============================================
 CREATE TABLE Equipment (
     equipment_id INT PRIMARY KEY AUTO_INCREMENT,
     equipment_name VARCHAR(50) NOT NULL,
@@ -336,9 +327,8 @@ CREATE TABLE Equipment (
     condition_status VARCHAR(30) DEFAULT 'Good'
 );
 
--- =============================================
 -- Supplier Table
--- =============================================
+
 CREATE TABLE Supplier (
     supplier_id INT PRIMARY KEY AUTO_INCREMENT,
     supplier_name VARCHAR(50) NOT NULL,
@@ -347,9 +337,7 @@ CREATE TABLE Supplier (
     address VARCHAR(100)
 );
 
--- =============================================
 -- Product Table
--- =============================================
 CREATE TABLE Product (
     product_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
@@ -362,9 +350,7 @@ CREATE TABLE Product (
 #### Step 2: Create Tables with Foreign Keys
 
 ```sql
--- =============================================
 -- Feed Table
--- =============================================
 CREATE TABLE Feed (
     feed_id INT PRIMARY KEY AUTO_INCREMENT,
     feed_name VARCHAR(50) NOT NULL,
@@ -376,9 +362,7 @@ CREATE TABLE Feed (
         ON UPDATE CASCADE
 );
 
--- =============================================
 -- Sale Table
--- =============================================
 CREATE TABLE Sale (
     sale_id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT NOT NULL,
@@ -390,9 +374,7 @@ CREATE TABLE Sale (
         ON UPDATE CASCADE
 );
 
--- =============================================
 -- Operation_Record Table
--- =============================================
 CREATE TABLE Operation_Record (
     operation_id INT PRIMARY KEY AUTO_INCREMENT,
     operation_type VARCHAR(50) NOT NULL,
@@ -417,9 +399,7 @@ CREATE TABLE Operation_Record (
         ON UPDATE CASCADE
 );
 
--- =============================================
 -- Production_Source Table
--- =============================================
 CREATE TABLE Production_Source (
     source_id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT NOT NULL,
@@ -437,9 +417,7 @@ CREATE TABLE Production_Source (
     CHECK (crop_id IS NOT NULL OR animal_id IS NOT NULL)
 );
 
--- =============================================
 -- Feed_Usage Table
--- =============================================
 CREATE TABLE Feed_Usage (
     usage_id INT PRIMARY KEY AUTO_INCREMENT,
     operation_id INT NOT NULL,
@@ -560,32 +538,6 @@ DESCRIBE Livestock;
 
 -- Check relationships
 SHOW CREATE TABLE Operation_Record;
-```
-
----
-
-
-### Common Queries
-
-```sql
--- View all operations by employee
-SELECT e.first_name, e.last_name, o.operation_type, o.operation_date
-FROM Employee e
-JOIN Operation_Record o ON e.employee_id = o.employee_id
-ORDER BY o.operation_date DESC;
-
--- Track feed usage
-SELECT f.feed_name, SUM(fu.quantity_kg) as total_used
-FROM Feed f
-JOIN Feed_Usage fu ON f.feed_id = fu.feed_id
-GROUP BY f.feed_name;
-
--- Sales report
-SELECT p.name, SUM(s.quantity) as total_sold, SUM(s.quantity * p.price_per_unit) as revenue
-FROM Product p
-JOIN Sale s ON p.product_id = s.product_id
-GROUP BY p.product_id
-ORDER BY revenue DESC;
 ```
 
 ---
