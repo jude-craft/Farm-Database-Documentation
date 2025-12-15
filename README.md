@@ -574,7 +574,7 @@ Contributions are welcome! Please follow these guidelines:
 ---
 ## 👥 Authors
 
-- **Visionary Nexus** - *Initial work* - [Jude-craft](https://github.com/jude-craft)
+- **Group 2 - Visionary Nexus** - *Initial work* - [Jude-craft](https://github.com/jude-craft)
 
 ---
 
