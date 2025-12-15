@@ -7,6 +7,21 @@
 A comprehensive database system designed to manage all aspects of a university farm's operations, including crops, livestock, equipment, feed management, production tracking, and sales.
 
 ---
+## 📁 Project Structure
+
+```
+farm-db_documentation/
+│
+├── README.md                      # This documentation file
+│
+├── docs/
+│   └── SAMPLE_DATA.sql            # Sample data for testing
+│
+└── assets/
+  ├── ERD.png                      # ERD screenshot
+  └── Updated_Farm_ERD.mwb         # MySQL Workbench model file
+
+```
 
 ## 📋 Table of Contents
 
@@ -542,21 +557,7 @@ SHOW CREATE TABLE Operation_Record;
 
 ---
 
-## 📁 Project Structure
 
-```
-farm-db_documentation/
-│
-├── README.md                      # This documentation file
-│
-├── docs/
-│   └── SAMPLE_DATA.sql            # Sample data for testing
-│
-└── assets/
-  ├── ERD.png                      # ERD screenshot
-  └── Updated_Farm_ERD.mwb         # MySQL Workbench model file
-
-```
 
 
 
